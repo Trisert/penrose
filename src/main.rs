@@ -70,7 +70,7 @@ fn main() -> Result<()> {
     let n_main = 1;
 
     // Default percentage of the screen to fill with the main area of the layout
-    let ratio = 0.6;
+    let ratio = 0.55;
 
     // Layouts to be used on each workspace. Currently all workspaces have the same set of Layouts
     // available to them, though they track modifications to n_main and ratio independently.
