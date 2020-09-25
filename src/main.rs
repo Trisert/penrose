@@ -49,7 +49,7 @@ fn main() -> Result<()> {
     config.workspaces = vec!["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
     // Windows with a matching WM_CLASS will always float
-    config.floating_classes = &["dmenu", "dunst", "polybar"];
+    config.floating_classes = &["dmenu", "dunst", "polybar", "rofi"];
 
     // Client border colors are set based on X focus
     config.focused_border = 0xf59342; // #cc241d
@@ -162,7 +162,7 @@ fn main() -> Result<()> {
         "M-A-Left" => run_internal!(update_main_ratio, Less);
 
         "M-A-s" => run_internal!(detect_screens);
-        "M-A-Escape" => run_internal!(exit);
+        "M-S-Escape" => run_internal!(exit);
 
         // Each keybinding here will be templated in with the workspace index of each workspace,
         // allowing for common workspace actions to be bound at once.
