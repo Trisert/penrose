@@ -52,7 +52,7 @@ fn main() -> Result<()> {
     config.floating_classes = &["dmenu", "dunst", "polybar"];
 
     // Client border colors are set based on X focus
-    config.focused_border = 0xcc241d; // #cc241d
+    config.focused_border = 0xf59342; // #cc241d
     config.unfocused_border = 0x3c3836; // #3c3836
 
     // When specifying a layout, most of the time you will want LayoutConf::default() as shown
