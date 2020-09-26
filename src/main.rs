@@ -11,6 +11,7 @@ extern crate penrose;
 
 use penrose::{
     client::Client,
+    draw::{dwm_bar, TextStyle, XCBDraw},
     contrib::{
         extensions::Scratchpad,
         hooks::{DefaultWorkspace, LayoutSymbolAsRootName},
@@ -35,6 +36,14 @@ impl Hook for MyClientHook {
     }
 }
 
+const HEIGHT: usize = 18;
+const PROFONT: &str = "MesloLGS NF";
+
+const BLACK: u32 = 0x282828ff; 
+const GREY: u32 = 0x7e7e7eff;
+const WHITE: u32 = 0xebdbb2ff;
+const ORANGE: u32 = 0xf59342ff;
+
 fn main() -> Result<()> {
     // penrose will log useful information about the current state of the WindowManager during
     // normal operation that can be used to drive scripts and related programs. Additional debug
@@ -55,6 +64,21 @@ fn main() -> Result<()> {
     config.focused_border = 0xf59342; // #cc241d
     config.unfocused_border = 0x3c3836; // #3c3836
 
+    config.hooks.push(Box::new(dwm_bar(
+                Box::new(XCBDraw::new()?),
+                HEIGHT,
+                &TextStyle {
+                    font: PROFONT.to_string(),
+                    point_size: 11,
+                    fg: WHITE.into(),
+                    bg: Some(BLACK.into()),
+                    padding: (2.0, 2.0),
+                },
+                ORANGE,
+                GREY,
+                &config.workspaces,
+            )?));
+
     // When specifying a layout, most of the time you will want LayoutConf::default() as shown
     // below, which will honour gap settings and will not be run on focus changes (only when
     // clients are added/removed). To customise when/how each layout is applied you can create a
@@ -63,7 +87,7 @@ fn main() -> Result<()> {
         floating: false,
         gapless: true,
         follow_focus: true,
-        allow_wrapping: false,
+        allow_wrapping: true,
     };
 
     // Defauly number of clients in the main layout area
@@ -154,8 +178,8 @@ fn main() -> Result<()> {
         "M-S-bracketleft" => run_internal!(drag_workspace, Backward);
 
         // Layout management
-        "M-grave" => run_internal!(cycle_layout, Forward);
-        "M-S-grave" => run_internal!(cycle_layout, Backward);
+        "M-period" => run_internal!(cycle_layout, Forward);
+        "M-S-period" => run_internal!(cycle_layout, Backward);
         "M-A-Up" => run_internal!(update_max_main, More);
         "M-A-Down" => run_internal!(update_max_main, Less);
         "M-A-Right" => run_internal!(update_main_ratio, More);
