@@ -186,6 +186,8 @@ fn main() -> Result<()> {
 
     spawn(format!("{}/.local/bin/startup", home));
 
+    spawn("wmname LG3D");
+
     // grab_keys_and_run will start listening to events from the X server and drop into the main
     // event loop. From this point on, program control passes to the WindowManager so make sure
     // that any logic you wish to run is done before here!
