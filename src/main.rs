@@ -144,6 +144,9 @@ fn main() -> Result<()> {
     let sp = Scratchpad::new("alacritty", 0.8, 0.8);
     sp.register(&mut config);
 
+    let fr = Scratchpad::new("firefox", 0.9, 0.9);
+    fr.register(&mut config);
+
     /* The gen_keybindings macro parses user friendly key binding definitions into X keycodes and
      * modifier masks. It uses the 'xmodmap' program to determine your current keymap and create
      * the bindings dynamically on startup. If this feels a little too magical then you can
@@ -169,6 +172,7 @@ fn main() -> Result<()> {
         "M-S-c" => run_internal!(kill_client);
         "M-S-f" => run_internal!(toggle_client_fullscreen, &Selector::Focused);
         "M-slash" => sp.toggle();
+        "M-comma" => fr.toggle();
 
         // workspace management
         "M-Tab" => run_internal!(toggle_workspace);
@@ -211,6 +215,7 @@ fn main() -> Result<()> {
     spawn(format!("{}/.local/bin/startup", home));
 
     spawn("wmname LG3D");
+    spawn("setxkbmap it");
 
     // grab_keys_and_run will start listening to events from the X server and drop into the main
     // event loop. From this point on, program control passes to the WindowManager so make sure
