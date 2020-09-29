@@ -108,7 +108,7 @@ fn main() -> Result<()> {
     let home = env::var("HOME").unwrap();
 
     // NOTE: change these to programs that you have installed!
-    let my_program_launcher = "dmenu_run";
+    let my_program_launcher = "dmenu_run -l 8 -p Run ";
     let my_file_manager = "alacritty -e ranger";
     let my_terminal = "alacritty";
     let my_browser = "firefox";
@@ -163,6 +163,10 @@ fn main() -> Result<()> {
         "M-f" => run_external!(my_file_manager);
         "M-s" => run_external!(my_browser);
         "M-a" => run_external!("slock");
+        "M-S-p" => run_external!("picomdmenu");
+        "XF86AudioRaiseVolume" => run_external!("pactl set-sink-volume @DEFAULT_SINK@ +10%");
+        "XF86AudioLowerVolume" => run_external!("pactl set-sink-volume @DEFAULT_SINK@ -10%");
+        "M-S-l" => run_external!("cmpdmenu");
 
         // client management
         "M-j" => run_internal!(cycle_client, Forward);
