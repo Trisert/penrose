@@ -5,7 +5,7 @@ option1="Poweroff"
 
 options="$option0\n$option1"
 
-selected="$(echo "$options" | dmenu -l 2 -p "Cosa vuoi fare?")"
+selected="$(printf "$options" | dmenu -l 2 -p "Cosa vuoi fare?")"
 case $selected in
     $option0)
        alacritty -e sudo reboot ;;
