@@ -1,0 +1,14 @@
+#!/bin/sh
+
+option0="On"
+option1="Off"
+
+options="$option0\n$option1"
+
+selected="$(echo "$options" | dmenu -p "Picom")"
+case $selected in
+    $option0)
+        picom & ;;
+    $option1)
+        killall picom & ;;
+esac

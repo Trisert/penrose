@@ -1,0 +1,14 @@
+#!/bin/sh
+
+option0="Reboot"
+option1="Poweroff"
+
+options="$option0\n$option1"
+
+selected="$(echo "$options" | dmenu -l 2 -p "Cosa vuoi fare?")"
+case $selected in
+    $option0)
+       alacritty -e sudo reboot ;;
+    $option1)
+       alacritty -e sudo poweroff ;;
+esac

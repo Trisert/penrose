@@ -25,7 +25,6 @@ use penrose::{
 
 use simplelog::{LevelFilter, SimpleLogger};
 use std::collections::HashMap;
-use std::env;
 
 // An example of a simple custom hook. In this case we are creating a NewClientHook which will
 // be run each time a new client program is spawned.
@@ -104,8 +103,6 @@ fn main() -> Result<()> {
         Layout::new("[papr]", follow_focus_conf, paper, n_main, ratio),
         Layout::floating("[----]"),
     ];
-
-    let home = env::var("HOME").unwrap();
 
     // NOTE: change these to programs that you have installed!
     let my_program_launcher = "dmenu_run -l 8 -p Run ";
@@ -216,10 +213,9 @@ fn main() -> Result<()> {
     // external processes such as a start-up script.
     let mut wm = WindowManager::init(config, &conn);
 
-    spawn(format!("{}/.local/bin/startup", home));
-
     spawn("wmname LG3D");
     spawn("setxkbmap it");
+    spawn("wal -R");
 
     // grab_keys_and_run will start listening to events from the X server and drop into the main
     // event loop. From this point on, program control passes to the WindowManager so make sure
