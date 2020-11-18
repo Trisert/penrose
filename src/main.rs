@@ -36,7 +36,7 @@ impl Hook for MyClientHook {
 }
 
 const HEIGHT: usize = 18;
-const PROFONT: &str = "MesloLGS NF";
+const PROFONT: &str = "JetBrainsMono Nerd Font";
 
 const BLACK: u32 = 0x282828ff; 
 const GREY: u32 = 0x7e7e7eff;
@@ -105,9 +105,9 @@ fn main() -> Result<()> {
     ];
 
     // NOTE: change these to programs that you have installed!
-    let my_program_launcher = "dmenu_run -l 8 -p Run ";
+    let my_program_launcher = "rofi -combi-modi run,drun,window -show combi";
     let my_file_manager = "alacritty -e ranger";
-    let my_terminal = "alacritty";
+    let my_terminal = "st";
     let my_browser = "firefox";
 
     /* hooks
@@ -138,7 +138,7 @@ fn main() -> Result<()> {
     // Scratchpad is an extension: it makes use of the same Hook points as the examples above but
     // additionally provides a 'toggle' method that can be bound to a key combination in order to
     // trigger the bound scratchpad client.
-    let sp = Scratchpad::new("alacritty", 0.8, 0.8);
+    let sp = Scratchpad::new(my_terminal, 0.8, 0.8);
     sp.register(&mut config);
 
     let fr = Scratchpad::new("firefox", 0.9, 0.9);
@@ -216,6 +216,7 @@ fn main() -> Result<()> {
     spawn("wmname LG3D");
     spawn("setxkbmap it");
     spawn("wal -R");
+    spawn("picom");
 
     // grab_keys_and_run will start listening to events from the X server and drop into the main
     // event loop. From this point on, program control passes to the WindowManager so make sure

@@ -1,5 +1,7 @@
 all:
-	cargo update; cargo build --release
+	cargo update
+	cargo build --release
 
 install:
-	rm -rf ~/.local/bin/penrose ; cp ~/penrose/target/release/penrose ~/.local/bin
+	rm -rf ~/.local/bin/penrose 
+	cp ~/penrose/target/release/penrose ~/.local/bin
